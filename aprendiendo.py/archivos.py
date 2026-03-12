@@ -29,5 +29,3 @@ def existe_palabra(nombre_archivo: str, palabra: str) -> bool:
             existe_la_palabra = True
     abrir_archivo.close()
     return existe_la_palabra
-
-            
