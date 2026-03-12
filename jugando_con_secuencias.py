@@ -48,7 +48,7 @@ def minimo(s: list[int]) -> int:
 
 def ordenados(s: list[int]) -> bool:
     for i in range(len(s) - 1):
-        if s[i]  >= s[i + 1]:  # la condicion es negativa a lo que queremos
+        if s[i]  >= s[i + 1]:  # la condicion es negativa a lo que queremos 
             return False    # asi, el return es falso tambien, porque en ese caso falso devuelve falso
     return True
 

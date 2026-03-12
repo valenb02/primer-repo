@@ -95,13 +95,5 @@ def atencion_a_clientes(c: Cola[tuple[str,int,bool,bool]]) -> Cola[tuple[str,int
         c.put(cola_aux.get())
     return cola_res
 
-c = Cola()
-c.put(("Valen B", 44049734, False, False)) #4
-c.put(("Rodri B", 44049734, True, False)) #3 
-c.put(("Caro E", 20826315, False, True))#1
-c.put(("Cesar B", 12938373, True, True)) #2
 
-cola_atencion = atencion_a_clientes(c)
-while not cola_atencion.empty():
-    print(cola_atencion.get())
 

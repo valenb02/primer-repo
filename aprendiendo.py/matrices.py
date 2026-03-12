@@ -120,3 +120,4 @@ def transponer(m: list[list[int]]) -> list[list[int]]:
 print(transponer([[1,2,3],[4,5,6],[7,8,9]]))
 
 # intentarla volver a hacer
+ 
