@@ -104,6 +104,16 @@ def intercambiar_e_invertir_columnas(matriz: list[list[int]], col1: int, col2:in
             res.append(invertir(obtener_col(matriz,col2)))
     return res
 
-print(intercambiar_e_invertir_columnas([[1,2,3],
-                                        [4,5,6],
-                                        [7,8,9]], 1, 2))
+
+# {"valen": "neco", "caro": "lobe", "maxi": "mdq", "rodri": "neco"}, {"valen": "bsas", "caro": "neco", "maxi": "mdq", "rodri": "neco"} =
+#                 {"neco": 1, "lobe": 0,  "mdq": 1} }
+
+def mantuvieron_residencia(censo1: dict[str,str], censo2: dict[str,str]) -> dict[str,int]:
+    dicc_res : dict[str,int] = {}
+    for localidad in censo1.values():
+        dicc_res[localidad] = 0
+    for ciudadano in censo2:
+        ciudad = censo1[ciudadano]
+        if ciudad == censo2[ciudadano]:
+            dicc_res[ciudad] += 1
+    return dicc_res
