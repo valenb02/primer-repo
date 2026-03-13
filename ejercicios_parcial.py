@@ -62,3 +62,48 @@ def tuplas_positivas_y_negativas(c: Cola[tuple[int,int]]):
         cola_res.put(cola_tuplas_negativas.get())
     while not cola_res.empty():
         c.put(cola_res.get())
+
+# [1,2,3,4,5] 5 = 2
+
+def cant_parejas_q_suman(s: list[int], num: int) -> int:
+    parejas_que_suman : int = 0
+    for i in range(len(s)):
+        for j in range(i + 1,len(s)):
+            if s[i] + s[j] == num:
+                parejas_que_suman += 1
+    return parejas_que_suman
+
+def obtener_col(matriz: list[list[int]], col: int) -> list[int]:
+    columnas : int = len(matriz[0])
+    columna : list[int] = []
+    for j in range(columnas):
+        for i in range(len(matriz)):
+            if j == col:
+                columna.append(matriz[i][j])
+    return columna
+
+def invertir(columna: list[int]) -> list[int]:
+    res : list[int] = []
+    for i in range(len(columna) - 1, -1, -1):
+        res.append(columna[i])
+    return res
+
+# [[1,2,3],           [1,9,8]
+#  [4,5,6],   1  2 =  [4,6,5]
+#  [7,8,9]]           [7,3,2]
+
+def intercambiar_e_invertir_columnas(matriz: list[list[int]], col1: int, col2:int) -> list[list[int]]:
+    columnas_matriz_original : int = len(matriz[0])
+    res : list[list[int]] = []
+    for j in range(columnas_matriz_original):
+        if j != col1 and j != col2:
+            res.append(obtener_col(matriz,j))
+        elif j == col1:
+            res.append(invertir(obtener_col(matriz, col2)))
+        else:
+            res.append(invertir(obtener_col(matriz,col2)))
+    return res
+
+print(intercambiar_e_invertir_columnas([[1,2,3],
+                                        [4,5,6],
+                                        [7,8,9]], 1, 2))
