@@ -29,3 +29,25 @@ def existe_palabra(nombre_archivo: str, palabra: str) -> bool:
             existe_la_palabra = True
     abrir_archivo.close()
     return existe_la_palabra
+
+
+def cantidad_de_apariciones(nombre_archivo: str, palabra: str) -> int:
+    archivo_abierto : TextIO = open(nombre_archivo, 'r')
+    leer_linea : str = archivo_abierto.readline()
+    armar_palabra : str = ""
+    contador : int = 0
+    while leer_linea != "":
+        for letra in leer_linea:
+            if letra != " " and letra != "\n":
+                armar_palabra += letra
+            else:
+                if armar_palabra == palabra:
+                    contador += 1
+                armar_palabra = ""
+        if armar_palabra == palabra:
+                    contador += 1
+        leer_linea = archivo_abierto.readline()
+    archivo_abierto.close()
+    return contador
+
+print(cantidad_de_apariciones("carpeta para poner archivos/archivo.txt", "valentina"))
