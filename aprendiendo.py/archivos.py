@@ -77,6 +77,18 @@ def agrupar_por_longitud(nombre_archivo: str) -> dict[int,int]:
     abrir_archivo.close()
     return dicc_res
 
-print(agrupar_por_longitud("carpeta para poner archivos/archivo.txt"))
+def agregar_frase_al_final(nombre_archivo: str, frase: str):
+    archivo = open(nombre_archivo, "a")
+    archivo.write(frase + "\n")
+    archivo.close()
 
+def agregar_frase_al_principio(nombre_archivo: str, frase: str):
+    archivo : TextIO = open(nombre_archivo, "r")
+    contenido : str = archivo.read()
+    archivo.close()
+
+    abrir_archivo : TextIO = open(nombre_archivo,"w")
+    abrir_archivo.write(frase + "\n")
+    abrir_archivo.write(contenido)
+    abrir_archivo.close()
     
