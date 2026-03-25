@@ -91,5 +91,56 @@ def agregar_frase_al_principio(nombre_archivo: str, frase: str):
     abrir_archivo.write(frase + "\n")
     abrir_archivo.write(contenido)
     abrir_archivo.close()
+#####################################
+from typing import TextIO
+
+def parsear_linea(linea: str) -> list[str]:
+    campos = []
+    actual = ""
+    for c in linea:
+        if c == ",":
+            campos.append(actual)
+            actual = ""
+        elif c != "\n":
+            actual += c
+    campos.append(actual)
+    return campos
 
 
+def diccionario_lu_y_notas(diccionario: dict[str, list], linea_convertida_a_lista: list):
+    LU: str = linea_convertida_a_lista[0]
+    nota: float = float(linea_convertida_a_lista[3])
+
+    if LU not in diccionario:
+        diccionario[LU] = [nota]
+    else:
+        diccionario[LU].append(nota)
+
+
+def promedio_estudiante(LU: str, diccio: dict[str, list]) -> float:
+    suma: float = 0
+    cant_notas: int = 0
+
+    for nota in diccio[LU]:
+        suma += nota
+        cant_notas += 1
+
+    return suma / cant_notas
+
+def calcular_promedio_por_estudiante(nombre_archivo_notas: str, nombre_archivo_promedios: str):
+    abrir_archivo_notas: TextIO = open(nombre_archivo_notas, "r")
+    diccionario: dict[str, list] = {}
+    leer_linea: str = abrir_archivo_notas.readline()
+    while leer_linea != "":
+        convertir_str_a_lista: list[str] = parsear_linea(leer_linea)
+        diccionario_lu_y_notas(diccionario, convertir_str_a_lista)
+        leer_linea = abrir_archivo_notas.readline()
+    abrir_archivo_promedios: TextIO = open(nombre_archivo_promedios, "w")
+    for LU in diccionario:
+        prom = promedio_estudiante(LU, diccionario)
+        abrir_archivo_promedios.write(LU + "," + str(prom) + "\n")
+
+    abrir_archivo_notas.close()
+    abrir_archivo_promedios.close()
+
+    
